@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>汪爱民老师 - 武术教学</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['SF Pro Display', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      }
+      .glass-dark {
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+      }
+      .liquid-transition {
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .bg-gradient-custom {
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-custom text-light min-h-screen overflow-x-hidden font-sans">
+  <!-- 粒子背景效果 -->
+  <div class="fixed inset-0 z-0 opacity-20 overflow-hidden">
+    <div id="particles" class="absolute inset-0"></div>
+  </div>
+
+  <!-- 导航栏 -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 liquid-transition py-4 px-6 md:px-12">
+    <div class="glass-dark rounded-full px-6 py-3 flex justify-between items-center max-w-7xl mx-auto">
+      <a href="#" class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+          <i class="fa fa-balance-scale text-white text-xl"></i>
+        </div>
+        <span class="text-xl font-semibold tracking-wide">汪爱民老师</span>
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#about" class="liquid-transition hover:text-primary">关于老师</a>
+        <a href="#martial-arts" class="liquid-transition hover:text-primary">武术教学</a>
+        <a href="#location" class="liquid-transition hover:text-primary">教学地点</a>
+      </div>
+      
+      <button id="menu-toggle" class="md:hidden text-2xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="glass-dark rounded-xl mt-4 px-6 py-4 hidden md:hidden liquid-transition max-w-md mx-auto">
+      <div class="flex flex-col space-y-4">
+        <a href="#about" class="liquid-transition hover:text-primary py-2">关于老师</a>
+        <a href="#martial-arts" class="liquid-transition hover:text-primary py-2">武术教学</a>
+        <a href="#location" class="liquid-transition hover:text-primary py-2">教学地点</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="pt-32 pb-20 px-6 md:px-12 relative z-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2 space-y-6">
+          <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight text-shadow">
+            汪爱民老师<br>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">武术传承教学</span>
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 max-w-lg">
+            专业武术教练，专注传统武术教学，在天津市红桥区传授正宗武术技艺，弘扬中华武术精神。
+          </p>
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a href="#location" class="glass hover:bg-primary/30 liquid-transition px-8 py-3 rounded-full font-medium flex items-center gap-2">
+              <span>查看教学地点</span>
+              <i class="fa fa-map-marker"></i>
+            </a>
+            <a href="#martial-arts" class="glass border border-white/20 hover:border-primary/50 liquid-transition px-8 py-3 rounded-full font-medium">
+              了解课程
+            </a>
+          </div>
+        </div>
+        
+        <div class="md:w-1/2 relative">
+          <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass hover-lift">
+            <img src="https://picsum.photos/id/1060/800/800" alt="汪老师武术展示" class="w-full h-full object-cover liquid-transition hover:scale-105">
+          </div>
+          <div class="absolute -bottom-6 -left-6 glass p-4 rounded-xl hover-lift hidden md:block">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
+                <i class="fa fa-trophy text-secondary text-xl"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-300">教学经验</p>
+                <p class="text-xl font-bold">多年专业经验</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 关于老师 -->
+  <section id="about" class="py-20 px-6 md:px-12 relative z-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-4">关于汪老师</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+      </div>
+      
+      <div class="glass rounded-2xl p-8 md:p-12 hover-lift">
+        <div class="flex flex-col md:flex-row gap-10">
+          <div class="md:w-2/5">
+            <div class="rounded-xl overflow-hidden h-full">
+              <img src="https://picsum.photos/id/1005/600/800" alt="汪老师照片" class="w-full h-full object-cover liquid-transition hover:scale-105">
+            </div>
+          </div>
+          
+          <div class="md:w-3/5 space-y-6">
+            <h3 class="text-2xl font-semibold">汪爱民老师简介</h3>
+            <p class="text-gray-300 leading-relaxed">
+              汪爱民老师（汪老师）自幼习武，师从多位武术名家，精通多种传统武术流派，包括太极拳、形意拳、八卦掌等内家拳术，以及少林拳、咏春拳等外家功夫。
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+              汪老师拥有多年武术教学经验，始终秉持"德艺双馨"的教学理念，注重学员的品德修养与技艺提升。教学风格严谨细致，因材施教，善于根据不同学员的特点制定合适的教学计划。
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+              汪老师目前在天津市红桥区设立固定教学点，专注于传统武术的传承与教学工作，培养了众多武术爱好者，深受学员们的尊敬与喜爱。
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div class="glass-dark p-4 rounded-lg">
+                <div class="flex items-center gap-3 mb-2">
+                  <i class="fa fa-check-circle text-secondary"></i>
+                  <h4 class="font-medium">专业背景</h4>
+                </div>
+                <p class="text-sm text-gray-400">师从多位武术名家</p>
+              </div>
+              <div class="glass-dark p-4 rounded-lg">
+                <div class="flex items-center gap-3 mb-2">
+                  <i class="fa fa-check-circle text-secondary"></i>
+                  <h4 class="font-medium">教学特色</h4>
+                </div>
+                <p class="text-sm text-gray-400">注重基础，循序渐进</p>
+              </div>
+              <div class="glass-dark p-4 rounded-lg">
+                <div class="flex items-center gap-3 mb-2">
+                  <i class="fa fa-check-circle text-secondary"></i>
+                  <h4 class="font-medium">教学理念</h4>
+                </div>
+                <p class="text-sm text-gray-400">以德为先，文武兼修</p>
+              </div>
+              <div class="glass-dark p-4 rounded-lg">
+                <div class="flex items-center gap-3 mb-2">
+                  <i class="fa fa-check-circle text-secondary"></i>
+                  <h4 class="font-medium">教学对象</h4>
+                </div>
+                <p class="text-sm text-gray-400">少儿至成人，零基础可学</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 武术简介与教学 -->
+  <section id="martial-arts" class="py-20 px-6 md:px-12 relative z-10 bg-dark/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-4">武术教学</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">武术不仅是一种格斗技巧，更是一种修身养性的方式，汪老师将带你领略中华武术的博大精深</p>
+        <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+      </div>
+      
+      <!-- 武术简介 -->
+      <div class="glass rounded-2xl p-8 md:p-12 mb-16 hover-lift">
+        <h3 class="text-2xl font-semibold mb-6">中华武术简介</h3>
+        <p class="text-gray-300 leading-relaxed mb-6">
+          中华武术是中华民族在长期的历史发展过程中形成的独特文化现象，是中华民族智慧的结晶。它不仅是一种身体锻炼方式，更是一种精神修养的途径。
+        </p>
+        <p class="text-gray-300 leading-relaxed mb-6">
+          武术内容丰富，流派众多，主要分为内家拳和外家拳两大类。内家拳注重内功修炼，以柔克刚，如太极拳、形意拳、八卦掌等；外家拳则注重筋骨锻炼，刚劲有力，如少林拳、南拳、长拳等。
+        </p>
+        <p class="text-gray-300 leading-relaxed">
+          学习武术不仅可以强身健体、防身自卫，还能培养坚韧不拔的意志品质、谦逊有礼的道德修养和积极向上的人生态度。
+        </p>
+      </div>
+      
+      <!-- 教学课程 -->
+      <h3 class="text-2xl font-semibold mb-8 text-center">汪老师教授课程</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 课程卡片1 -->
+        <div class="glass rounded-xl overflow-hidden hover-lift group">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/1076/600/400" alt="太极拳课程" class="w-full h-full object-cover liquid-transition group-hover:scale-105">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold">太极拳课程</h3>
+              <span class="glass-dark text-sm px-3 py-1 rounded-full">内家拳</span>
+            </div>
+            <p class="text-gray-400 mb-6">学习太极拳的基本招式、呼吸方法和养生之道，适合各年龄段，尤其适合养生健身。</p>
+            <div class="flex items-center gap-2">
+              <i class="fa fa-clock-o text-primary"></i>
+              <span>系统课程教学</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 课程卡片2 -->
+        <div class="glass rounded-xl overflow-hidden hover-lift group">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/1082/600/400" alt="少林拳课程" class="w-full h-full object-cover liquid-transition group-hover:scale-105">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold">少林拳课程</h3>
+              <span class="glass-dark text-sm px-3 py-1 rounded-full">外家拳</span>
+            </div>
+            <p class="text-gray-400 mb-6">学习少林拳的基本功、套路和实战技巧，增强体质，培养坚毅品格。</p>
+            <div class="flex items-center gap-2">
+              <i class="fa fa-clock-o text-primary"></i>
+              <span>系统课程教学</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 课程卡片3 -->
+        <div class="glass rounded-xl overflow-hidden hover-lift group">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/176/600/400" alt="武术基础课程" class="w-full h-full object-cover liquid-transition group-hover:scale-105">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold">武术基础课程</h3>
+              <span class="glass-dark text-sm px-3 py-1 rounded-full">入门</span>
+            </div>
+            <p class="text-gray-400 mb-6">适合零基础学员，学习武术基本礼仪、站姿、步法和基础动作，打下坚实基础。</p>
+            <div class="flex items-center gap-2">
+              <i class="fa fa-clock-o text-primary"></i>
+              <span>入门课程教学</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 武术价值 -->
+      <div class="mt-16 glass rounded-2xl p-8 md:p-12">
+        <h3 class="text-2xl font-semibold mb-8 text-center">学习武术的益处</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-dark p-6 rounded-xl text-center hover-lift">
+            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-heartbeat text-primary text-2xl"></i>
+            </div>
+            <h4 class="font-medium mb-2">增强体质</h4>
+            <p class="text-sm text-gray-400">提高心肺功能，增强免疫力，改善身体协调性</p>
+          </div>
+          
+          <div class="glass-dark p-6 rounded-xl text-center hover-lift">
+            <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-shield text-secondary text-2xl"></i>
+            </div>
+            <h4 class="font-medium mb-2">防身自卫</h4>
+            <p class="text-sm text-gray-400">掌握实用防身技巧，提高自我保护能力</p>
+          </div>
+          
+          <div class="glass-dark p-6 rounded-xl text-center hover-lift">
+            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-balance-scale text-primary text-2xl"></i>
+            </div>
+            <h4 class="font-medium mb-2">修身养性</h4>
+            <p class="text-sm text-gray-400">培养专注力，增强自信心，磨练意志品质</p>
+          </div>
+          
+          <div class="glass-dark p-6 rounded-xl text-center hover-lift">
+            <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-book text-secondary text-2xl"></i>
+            </div>
+            <h4 class="font-medium mb-2">传承文化</h4>
+            <p class="text-sm text-gray-400">了解中华传统文化，传承武术精神</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教学地点 -->
+  <section id="location" class="py-20 px-6 md:px-12 relative z-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-4">教学地点</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">汪老师在天津市红桥区设有固定教学点，环境舒适，设施齐全，为学员提供良好的学习氛围</p>
+        <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-10">
+        <div class="lg:w-1/2 glass rounded-2xl overflow-hidden hover-lift h-[400px]">
+          <!-- 教学地点环境图 -->
+          <img src="https://picsum.photos/id/1031/800/800" alt="教学地点环境" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="lg:w-1/2 glass rounded-2xl p-8 hover-lift">
+          <h3 class="text-2xl font-semibold mb-6">天津市红桥区教学点</h3>
+          
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa fa-map-marker text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-medium">详细地址</h4>
+                <p class="text-gray-400">天津市红桥区</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa fa-clock-o text-secondary"></i>
+              </div>
+              <div>
+                <h4 class="font-medium">教学时间</h4>
+                <p class="text-gray-400">根据课程安排，详情请咨询</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa fa-info-circle text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-medium">教学环境</h4>
+                <p class="text-gray-400">宽敞明亮的训练场地，专业的武术训练器材，适合各年龄段学员学习</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa fa-subway text-secondary"></i>
+              </div>
+              <div>
+                <h4 class="font-medium">交通方式</h4>
+                <p class="text-gray-400">交通便利，临近公共交通站点</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="py-12 px-6 md:px-12 relative z-10 border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between gap-10">
+        <div class="md:w-1/3">
+          <div class="flex items-center space-x-2 mb-6">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <i class="fa fa-balance-scale text-white text-xl"></i>
+            </div>
+            <span class="text-xl font-semibold tracking-wide">汪爱民老师</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            传承中华武术精神，专注传统武术教学，在天津市红桥区传授正宗武术技艺。
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-medium mb-6">快速链接</h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="text-gray-400 hover:text-primary liquid-transition">关于老师</a></li>
+            <li><a href="#martial-arts" class="text-gray-400 hover:text-primary liquid-transition">武术教学</a></li>
+            <li><a href="#location" class="text-gray-400 hover:text-primary liquid-transition">教学地点</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-medium mb-6">教学地点</h4>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-2 text-gray-400">
+              <i class="fa fa-map-marker text-primary"></i>
+              <span>天津市红桥区</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-12 pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
+        <p>© 汪爱民老师武术教学 | 专注传统武术传承</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('glass-dark');
+        navbar.classList.remove('py-4');
+        navbar.classList.add('py-2');
+      } else {
+        navbar.classList.remove('glass-dark');
+        navbar.classList.add('py-4');
+        navbar.classList.remove('py-2');
+      }
+    });
+    
+    // 移动端菜单切换
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动端菜单
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+    
+    // 粒子背景效果
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 5 + 1;
+        
+        particle.style.position = 'absolute';
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.backgroundColor = i % 3 === 0 ? '#3B82F6' : i % 3 === 1 ? '#10B981' : '#8B5CF6';
+        particle.style.borderRadius = '50%';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+        particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // 添加浮动动画
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes float {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        25% {
+          transform: translateY(-10px) translateX(10px);
+        }
+        50% {
+          transform: translateY(-20px) translateX(0);
+        }
+        75% {
+          transform: translateY(-10px) translateX(-10px);
+        }
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // 页面加载完成后初始化
+    window.addEventListener('load', function() {
+      createParticles();
+      
+      // 添加元素进入动画
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('section > div > div:not(.text-center)').forEach(el => {
+        el.classList.add('opacity-0', 'translate-y-10', 'liquid-transition');
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
